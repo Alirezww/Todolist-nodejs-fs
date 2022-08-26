@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/bootstrap-rtl.css" />
+        <link rel="stylesheet" href="css/font-awesome.css" />
+        <title><%= pageTitle %></title>
+    </head>
+    <body class="rtl">
+        <div class="form-group">
+            <h1>Todos list</h1>
+            <form
+                action="/admin/add-todo"
+                role="form"
+                class="row w-50 justify-content-center mx-auto"
+                method="POST"
+            >
+                <div class="input-group">
+                    <input
+                        type="text"
+                        name="todo"
+                        class="form-control w-50"
+                        placeholder="کار امروز"
+                    />
+                    <div class="input-group-prepend">
+                        <button type="submit" class="btn btn-primary fa fa-plus"/>
+                    </div>
+                </div>
+            </form>
+            <div class="mx-auto w-50 mb-3 alert alert-primary row">
+                <p class="d-inline col">
+                    done todos:
+                    <span class="badge badge-success badge-pill"
+                        ><%= completedTodos %>
+                    </span>
+                </p>
+                <p class="d-inline col">
+                    remaining todos:
+                    <span class="badge badge-warning badge-pill"
+                        ><%= remainingTodos %></span
+                    >
+                </p>
+            </div>
+            <% if(todos.length > 0) { %> 
+                <ul class="list-unstyled" id="todo">
+                    <% for(let todo of todos) { %> 
+                        <li>
+                            <div class="alert alert-secondary">
+                                <%= todo.text %> 
+                                <a href="#" class="close fa fa-trash" style="color: red"></a>
+                                <a href="#" class="close fa fa-check-square mrr-2" style="color: green"></a>
+                            </div>
+                        </li>
+                    <% } %> 
+                </ul>
+            <% } else { %> 
+                <div class="alert alert-warning w-50 mx-auto" role="alert">
+                    <h4 class="alert-heading">There is nothing todos for today😁</h4>
+                    <p>You can write your todo text to save it for you!😘😍</p>
+                    <hr>
+                    <p class="mb-0">If there are some shortcomings, don't worry<span class="fa fa-heart" style="color: red"/></p>
+                </div>
+            <% } %> 
+        </div>
+    </body>
+</html>
